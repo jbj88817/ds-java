@@ -2,15 +2,16 @@ package l3;
 
 import l2.Array;
 
-public class ArrayStack<E> implements Stack<E> {
+// dequeue is O(n)
+public class ArrayQueue<E> implements Queue<E> {
 
     private Array<E> mArray;
 
-    public ArrayStack(int capacity) {
+    public ArrayQueue(int capacity) {
         mArray = new Array<>(capacity);
     }
 
-    public ArrayStack() {
+    public ArrayQueue() {
         mArray = new Array<>();
     }
 
@@ -19,18 +20,18 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     @Override
-    public void push(E e) {
+    public void enqueue(E e) {
         mArray.addLast(e);
     }
 
     @Override
-    public E pop() {
-        return mArray.removeLast();
+    public E dequeue() {
+        return mArray.removeFirst();
     }
 
     @Override
-    public E peek() {
-        return mArray.getLast();
+    public E getFront() {
+        return mArray.getFirst();
     }
 
     @Override
@@ -46,27 +47,28 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Stack: ");
-        sb.append("[");
+        sb.append("Queue: ");
+        sb.append("front [");
         for (int i = 0; i < mArray.getSize(); i++) {
             sb.append(mArray.get(i));
             if (i != mArray.getSize() - 1) {
                 sb.append(", ");
             }
         }
-        sb.append("] top");
+        sb.append("] tail");
         return sb.toString();
     }
 
     public static void main(String[] args) {
-        ArrayStack<Integer> stack = new ArrayStack<>();
+        ArrayQueue<Integer> queue = new ArrayQueue<>();
 
-        for (int i = 0; i < 5; i++) {
-            stack.push(i);
-            System.out.println(stack);
+        for (int i = 0; i < 10; i++) {
+            queue.enqueue(i);
+            System.out.println(queue);
+            if (i % 3 == 2) {
+                queue.dequeue();
+                System.out.println(queue);
+            }
         }
-
-        stack.pop();
-        System.out.println(stack);
     }
 }
