@@ -1,5 +1,6 @@
 package l3;
 
+// Implement dequeue is O(1)
 public class LoopQueue<E> implements Queue<E> {
 
     @Override
