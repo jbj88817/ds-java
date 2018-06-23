@@ -2,6 +2,8 @@ package l3;
 
 import java.util.Random;
 
+import l4.LinkedListQueue;
+
 public class Main {
     private static double testQueue(Queue<Integer> q, int opCount) {
         long startTime = System.nanoTime();
@@ -30,5 +32,9 @@ public class Main {
         LoopQueue<Integer> loopQueue = new LoopQueue<>();
         double time2 = testQueue(loopQueue, opCount);
         System.out.println("Loop Queue, time: " + time2 + " s");
+
+        LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
+        double time3 = testQueue(linkedListQueue, opCount);
+        System.out.println("LinkedList Queue, time: " + time3 + " s");
     }
 }

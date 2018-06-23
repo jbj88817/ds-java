@@ -50,12 +50,25 @@ public class LinkedListQueue<E> implements Queue<E> {
 
     @Override
     public E dequeue() {
-        return null;
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Cannot dequeue from an empty queue");
+        }
+        Node retNode = head;
+        head = head.next;
+        retNode.next = null;
+        if (head == null) {
+            tail = null;
+        }
+        size--;
+        return retNode.e;
     }
 
     @Override
     public E getFront() {
-        return null;
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Cannot dequeue from an empty queue");
+        }
+        return head.e;
     }
 
     @Override
@@ -66,5 +79,36 @@ public class LinkedListQueue<E> implements Queue<E> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+//        Node cur = dummyHead.next;
+//        while (cur != null) {
+//            sb.append(cur + "->");
+//            cur = cur.next;
+//        }
+
+        sb.append("Queue front: ");
+        for (Node cur = head; cur != null; cur = cur.next) {
+            sb.append(cur + "->");
+        }
+        sb.append("NULL tail");
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        LinkedListQueue<Integer> queue = new LinkedListQueue<>();
+
+        for (int i = 0; i < 10; i++) {
+            queue.enqueue(i);
+            System.out.println(queue);
+            if (i % 3 == 2) {
+                queue.dequeue();
+                System.out.println(queue);
+            }
+        }
     }
 }
