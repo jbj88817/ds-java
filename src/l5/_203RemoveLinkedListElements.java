@@ -19,6 +19,15 @@ public class _203RemoveLinkedListElements {
         return dummyHead.next;
     }
 
+    public ListNode removeElementsRecur(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+
+        head.next = removeElementsRecur(head.next, val);
+        return head.val == val ? head.next : head;
+    }
+
     public static void main(String[] args) {
         int[] nums = {1, 2, 6, 3, 4, 5, 6};
         ListNode head = new ListNode(nums);
@@ -26,5 +35,7 @@ public class _203RemoveLinkedListElements {
 
         ListNode res = (new _203RemoveLinkedListElements()).removeElements(head, 6);
         System.out.println(res);
+        ListNode res2 = (new _203RemoveLinkedListElements()).removeElementsRecur(head, 6);
+        System.out.println(res2);
     }
 }
