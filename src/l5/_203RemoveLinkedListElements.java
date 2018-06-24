@@ -19,13 +19,38 @@ public class _203RemoveLinkedListElements {
         return dummyHead.next;
     }
 
-    public ListNode removeElementsRecur(ListNode head, int val) {
+    public ListNode removeElementsRecur(ListNode head, int val, int depth) {
+        String depthString = generateDepthString(depth);
+        System.out.println(depthString);
+        System.out.println("Call: remove " + val + " in " + head);
         if (head == null) {
+            System.out.println(depthString);
+            System.out.println("Return " + head);
             return null;
         }
 
-        head.next = removeElementsRecur(head.next, val);
-        return head.val == val ? head.next : head;
+        ListNode res = removeElementsRecur(head.next, val, depth + 1);
+        System.out.println(depthString);
+        System.out.println("After remove " + val + ": " + res);
+
+        ListNode ret;
+        if (head.val == val) {
+            ret = res;
+        } else {
+            head.next = res;
+            ret = head;
+        }
+        System.out.println(depthString);
+        System.out.println("Return " + ret);
+        return ret;
+    }
+
+    private String generateDepthString(int depth) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            sb.append("--");
+        }
+        return sb.toString();
     }
 
     public static void main(String[] args) {
@@ -33,9 +58,9 @@ public class _203RemoveLinkedListElements {
         ListNode head = new ListNode(nums);
         System.out.println(head);
 
-        ListNode res = (new _203RemoveLinkedListElements()).removeElements(head, 6);
-        System.out.println(res);
-        ListNode res2 = (new _203RemoveLinkedListElements()).removeElementsRecur(head, 6);
+//        ListNode res = (new _203RemoveLinkedListElements()).removeElements(head, 6);
+//        System.out.println(res);
+        ListNode res2 = (new _203RemoveLinkedListElements()).removeElementsRecur(head, 6, 0);
         System.out.println(res2);
     }
 }
