@@ -80,4 +80,30 @@ public class BST<E extends Comparable<E>> {
             preOrder(node.right);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        generateBSTString(root, 0, sb);
+        return sb.toString();
+    }
+
+    private void generateBSTString(Node node, int depth, StringBuilder sb) {
+        if (node == null) {
+            sb.append(generateDepthString(depth) + "null\n");
+            return;
+        }
+
+        sb.append(generateDepthString(depth) + node.e + "\n");
+        generateBSTString(node.left, depth + 1, sb);
+        generateBSTString(node.right, depth + 1, sb);
+    }
+
+    private String generateDepthString(int depth) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            sb.append("--");
+        }
+        return sb.toString();
+    }
 }
