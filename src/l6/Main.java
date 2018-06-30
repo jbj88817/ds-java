@@ -8,11 +8,17 @@ public class Main {
             bst.add(num);
         }
 
-        bst.preOrder();
-        System.out.println();
-        bst.inOrder();
-        System.out.println();
+//        bst.preOrder();
+//        System.out.println();
+//        bst.preOrderNR();
+//        System.out.println();
+//        bst.inOrder();
+//        System.out.println();
+//        bst.inOrderNR();
+//        System.out.println();
         bst.postOrder();
+        System.out.println();
+        bst.postOrderNR();
 //        System.out.println(bst);
     }
 }

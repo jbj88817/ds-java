@@ -1,5 +1,7 @@
 package l6;
 
+import java.util.Stack;
+
 public class BST<E extends Comparable<E>> {
 
     private class Node {
@@ -81,6 +83,20 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    public void preOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+
+            if (cur.right != null)
+                stack.push(cur.right);
+            if (cur.left != null)
+                stack.push(cur.left);
+        }
+    }
+
     public void inOrder() {
         inOrder(root);
     }
@@ -93,6 +109,24 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    public void inOrderNR() {
+        if (root == null) {
+            return;
+        }
+
+        Stack<Node> stack = new Stack<>();
+        Node cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            System.out.println(cur.e);
+            cur = cur.right;
+        }
+    }
+
     public void postOrder() {
         postOrder(root);
     }
@@ -102,6 +136,32 @@ public class BST<E extends Comparable<E>> {
             postOrder(node.left);
             postOrder(node.right);
             System.out.println(node.e);
+        }
+    }
+
+    public void postOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        Node pre = null;
+        Node cur = root;
+
+        while(cur != null || !stack.empty()){
+
+            if(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            else{
+                cur = stack.pop();
+                if(cur.right == null || pre == cur.right){
+                    System.out.println(cur.e);
+                    pre = cur;
+                    cur = null;
+                }
+                else{
+                    stack.push(cur);
+                    cur = cur.right;
+                }
+            }
         }
     }
 
